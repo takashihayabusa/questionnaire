@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>管理画面</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h1>アンケート管理画面</h1>
+
+<h2>Q1 集計</h2>
+<canvas id="pieChart" width="400" height="400"></canvas>
+
+<script>
+const data = {
+    labels: {{ q1_counts.keys()|list|tojson }},
+    datasets: [{
+        data: {{ q1_counts.values()|list|tojson }},
+    }]
+};
+
+new Chart(document.getElementById("pieChart"), {
+    type: 'pie',
+    data: data
+});
+</script>
+
+<hr>
+
+<h2>回答一覧</h2>
+<table border="1">
+<tr>
+    <th>日付</th>
+    <th>名前</th>
+    <th>Q1</th>
+    <th>Q2</th>
+    <th>Q3</th>
+    <th>Q4</th>
+</tr>
+
+{% for r in rows %}
+<tr>
+    <td>{{ r.date }}</td>
+    <td>{{ r.name }}</td>
+    <td>{{ r.Q1 }}</td>
+    <td>{{ r.Q2 }}</td>
+    <td>{{ r.Q3 }}</td>
+    <td>{{ r.Q4 }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<br>
+<a href="/download?pw=1234">CSVダウンロード</a>
+
+</body>
+</html>

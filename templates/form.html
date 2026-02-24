@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>アンケート</title>
+</head>
+<body>
+
+<h2>簡単アンケート</h2>
+
+<form action="/submit" method="POST">
+    <p>お名前：</p>
+    <input type="text" name="name" required>
+
+    <p>好きな色は？</p>
+    <select name="color">
+        <option value="赤">赤</option>
+        <option value="青">青</option>
+        <option value="緑">緑</option>
+    </select>
+
+    <br><br>
+    <button type="submit">送信</button>
+</form>
+
+</body>
+</html>

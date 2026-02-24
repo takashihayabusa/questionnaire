@@ -1,0 +1,15 @@
+<h1>管理ダッシュボード</h1>
+
+<p>回答総数: {{ data.total }}</p>
+
+<h2>週休状況</h2>
+{% for k,v in data.q1.items() %}
+<p>{{k}} : {{v}}件</p>
+{% endfor %}
+
+<h2>パワハラ経験</h2>
+{% for k,v in data.harassment.items() %}
+<p>{{k}} : {{v}}件</p>
+{% endfor %}
+
+<img src="/static_qr.png" width="200">

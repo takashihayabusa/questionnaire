@@ -1,0 +1,21 @@
+<h2>集計結果</h2>
+
+<canvas id="chart"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const data = {
+    labels: {{ count.keys()|list|safe }},
+    datasets: [{
+        data: {{ count.values()|list|safe }}
+    }]
+};
+
+new Chart(document.getElementById('chart'), {
+    type: 'pie',
+    data: data
+});
+</script>
+
+<a href="/">戻る</a>
