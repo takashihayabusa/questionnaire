@@ -4,6 +4,11 @@ from datetime import datetime
 import os
 
 app = Flask(__name__)
+# ==========================
+# QR用URL設定
+# ==========================
+LIFF_URL = "https://liff.line.me/2009108719-XrG3xBru"
+WEB_URL = "https://questionnaire-itigo1151linewordapp.pythonanywhere.com/"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FILE_PATH = os.path.join(BASE_DIR, "survey_results.xlsx")
@@ -102,7 +107,55 @@ def survey():
         return render_template("complete.html")
 
     return render_template("survey.html")
+@app.route("/qr_print")
+def qr_print():
+    import qrcode
+    import base64
+    from io import BytesIO
 
+    def make_qr(url):
+        qr = qrcode.make(url)
+        buffer = BytesIO()
+        qr.save(buffer, format="PNG")
+        return base64.b64encode(buffer.getvalue()).decode()
+
+    line_qr = make_qr(LIFF_URL)
+    web_qr = make_qr(WEB_URL)
+
+    html = f"""
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>印刷用QR</title>
+        <style>
+            body {{
+                text-align: center;
+                font-family: sans-serif;
+                padding: 40px;
+            }}
+            img {{
+                width: 300px;
+                margin: 30px 0;
+            }}
+        </style>
+    </head>
+    <body onload="window.print()">
+
+        <h1>労働組合アンケート</h1>
+        <p>現場の声を会社へ届けるためのアンケートです。</p>
+
+        <h2>📱 LINEで回答</h2>
+        <img src="data:image/png;base64,{line_qr}">
+
+        <h2>🌍 ブラウザで回答</h2>
+        <img src="data:image/png;base64,{web_qr}">
+
+    </body>
+    </html>
+    """
+    return html
+    return html
+    return html
 
 if __name__ == "__main__":
     app.run()
