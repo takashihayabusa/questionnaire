@@ -3,194 +3,313 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>組合員アンケート</title>
+<title>2026年3月 組合員アンケート</title>
 
 <style>
+
 body{
-    font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
-    background:linear-gradient(to bottom,#eef7ff,#ffffff);
-    margin:0;
+font-family:sans-serif;
+background:#f4f8ff;
+margin:0;
+padding:15px;
 }
-.container{
-    max-width:720px;
-    margin:auto;
-    padding:25px;
-    background:white;
+
+.card{
+background:#fff;
+padding:20px;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+max-width:520px;
+margin:auto;
 }
-h1{text-align:center;color:#0066cc;}
-h2{
-    margin-top:35px;
-    color:#004c99;
-    border-left:6px solid #66b3ff;
-    padding-left:10px;
+
+.question{display:none;}
+.question.active{display:block;}
+
+label{
+display:block;
+padding:12px;
+margin:8px 0;
+background:#eef4ff;
+border-radius:8px;
 }
-.required{
-    color:red;
-    font-weight:bold;
-    margin-left:6px;
+
+input[type=text]{
+width:100%;
+padding:10px;
+border-radius:6px;
+border:1px solid #ccc;
 }
-p{margin:10px 0;}
-label{display:block;margin:6px 0;}
+
 textarea{
-    width:100%;
-    min-height:90px;
-    padding:8px;
+width:100%;
+height:100px;
+border-radius:6px;
+border:1px solid #ccc;
 }
+
 button{
-    margin-top:40px;
-    width:100%;
-    padding:15px;
-    font-size:18px;
-    background:#0099ff;
-    color:white;
-    border:none;
-    border-radius:6px;
+margin-top:12px;
+width:100%;
+padding:12px;
+border:none;
+background:#2d7df6;
+color:white;
+border-radius:8px;
+font-size:16px;
 }
-.note{
-    background:#e6f4ff;
-    padding:10px;
-    border-radius:6px;
-    margin:15px 0;
-}
-.footer{
-    text-align:center;
-    margin-top:40px;
-    font-weight:bold;
-}
+
+.back{background:#777;}
+
 </style>
 </head>
 
 <body>
-<div class="container">
 
-<h1>組合員アンケート（正式版・完全版）</h1>
+<div class="card">
 
-<h2>【はじめに】</h2>
+<form method="POST" action="/submit">
+
+<!-- 表紙 -->
+
+<div class="question active">
+
+<h2>2026年3月 組合員アンケート</h2>
+
 <p>
-組合員の皆さまの率直なご意見により、現場の問題点を把握し、会社と協議し改善につなげていきたいと考えております。<br>
-本アンケートは匿名で実施し、個人が特定されることはありません。<br>
-ご協力をお願いいたします。
+組合員の皆さんからのご意見をもとに職場の実態を把握し、
+皆さんが安心して働ける職場環境を作るために会社と協議していきたいと考えています。
 </p>
 
-<form id="surveyForm" method="POST" action="/survey">
+<p>
+皆さんからいただいた意見は今後の組合活動に活かしていきますので、
+率直なご意見をお聞かせください。
+</p>
 
-<input type="hidden" name="line_name" id="line_name">
+<table style="width:100%">
+<tr>
+<td style="width:30%">店舗</td>
+<td><input name="store"></td>
+</tr>
 
-<h2>お名前（任意）</h2>
-<p>※匿名希望の場合は空欄のままで構いません</p>
-<input type="text" name="manual_name" placeholder="お名前を入力（任意）" style="width:100%;padding:10px;">
+<tr>
+<td>部門</td>
+<td><input name="department"></td>
+</tr>
 
-<h2>【基本設問】</h2>
+<tr>
+<td>名前</td>
+<td><input name="name"></td>
+</tr>
+</table>
 
-<h2>Q1 週休について <span class="required">※必須</span></h2>
-<label><input type="radio" name="q1" value="週2日休めている"> 週2日休めている</label>
-<label><input type="radio" name="q1" value="週1日しか休めていない"> 週1日しか休めていない</label>
-<label><input type="radio" name="q1" value="ほとんど休めていない"> ほとんど休めていない</label>
+<button type="button" onclick="next()">アンケート開始</button>
 
-<h2>Q2 みなし残業について <span class="required">※必須</span></h2>
-
-<div class="note">（A）みなし残業が付いている方</div>
-
-<label><input type="radio" name="q2" value="1足りている"> 1足りている</label>
-<label><input type="radio" name="q2" value="2足りないのでタイムカードを打って仕事をしている"> 2足りないのでタイムカードを打って仕事をしている</label>
-<label><input type="radio" name="q2" value="3足りないがサービス残業はしていない"> 3足りないがサービス残業はしていない</label>
-
-<div class="note">（B）みなし残業がない方</div>
-<label><input type="radio" name="q2b" value="1残業時間内で終わっている"> 1残業時間内で終わっている</label>
-<label><input type="radio" name="q2b" value="2足りないのでタイムカードを打って仕事をしている"> 2足りないのでタイムカードを打って仕事をしている</label>
-<label><input type="radio" name="q2b" value="3足りないがサービス残業はしていない"> 3足りないがサービス残業はしていない</label>
-
-<h2>Q3 サービス残業時間</h2>
-<p>Q2の「足りないのでタイムカードを打って仕事をしている。」にチェックをした方は、1日どれくらいサービス残業をしていますか？</p>
-<label><input type="radio" name="q3" value="週1〜2回／1時間"> 週1〜2回／1時間</label>
-<label><input type="radio" name="q3" value="週1〜2回／2時間"> 週1〜2回／2時間</label>
-<label><input type="radio" name="q3" value="週1〜2回／3時間"> 週1〜2回／3時間</label>
-<label><input type="radio" name="q3" value="週1〜2回／4時間以上"> 週1〜2回／4時間以上</label>
-<label><input type="radio" name="q3" value="ほとんど毎日／1時間"> ほとんど毎日／1時間</label>
-<label><input type="radio" name="q3" value="ほとんど毎日／2時間"> ほとんど毎日／2時間</label>
-<label><input type="radio" name="q3" value="ほとんど毎日／3時間"> ほとんど毎日／3時間</label>
-<label><input type="radio" name="q3" value="ほとんど毎日／4時間"> ほとんど毎日／4時間</label>
-<label><input type="radio" name="q3" value="ほとんど毎日／5時間以上"> ほとんど毎日／5時間以上</label>
-
-<h2>Q4 Q2で２にチェックをつけた方のみ答えてください</h2>
-<p>あなたはなぜサービス残業をするのですか？該当する理由を一つ選んでください。</p>
-<label><input type="radio" name="q4" value="1会社（上司）の命令"> 会社（上司）の命令</label>
-<label><input type="radio" name="q4" value="2明確な命令はないが強要されている"> 明確な命令はないが強要されている</label>
-<label><input type="radio" name="q4" value="3要員不足のため仕方なく"> 要員不足のため仕方なく</label>
-<label><input type="radio" name="q4" value="4自分の判断"> 自分の判断</label>
-<label><input type="radio" name="q4" value="5要員は足りているが他人に任せられない"> 要員は足りているが他人に任せられない</label>
-<label><input type="radio" name="q4" value="6その他"> その他</label>
-
-<h2>Q5 要員不足について</h2>
-<p>Q4で「3・5」にチェックを付けた方のみ答えてください。要員不足について上司に相談をしましたか？</p>
-<label><input type="radio" name="q5" value="相談した"> 1 相談した</label>
-<label><input type="radio" name="q5" value="相談していない"> 2 相談していない</label>
-
-<h2>Q6 相談した方へ</h2>
-<p>Q5で「1」にチェックを付けた方のみ答えてください。上司に相談してどうなりましたか？</p>
-<label><input type="radio" name="q6" value="解決した"> 1 解決した</label>
-<label><input type="radio" name="q6" value="相談に乗ってくれるが改善なし"> 2 相談に乗ってくれるが改善なし</label>
-<label><input type="radio" name="q6" value="取り合ってもらえない"> 3 取り合ってもらえない</label>
-<label><input type="radio" name="q6" value="その他"> 4 その他</label>
-
-<h2>Q7 相談しなかった方へ</h2>
-<p>Q5で「2」にチェックを付けた方のみ答えてください。なぜ相談しなかったのですか？</p>
-<textarea name="q7_reason"></textarea>
-
-
-<h2>Q8 ハラスメントについて <span class="required">※必須</span></h2>
-<label><input type="radio" name="harassment" value="ない"> ない</label>
-<label><input type="radio" name="harassment" value="ある"> ある</label>
-
-<h2>Q9 会社のパワハラ対策について <span class="required">※必須</span></h2>
-<label><input type="radio" name="company_eval" value="できている"> できている</label>
-<label><input type="radio" name="company_eval" value="できていない"> できていない</label>
-
-<h2>【自由記述】</h2>
-<p>● 会社に要望があれば記入してください</p>
-<textarea name="company_request"></textarea>
-
-<p>● 組合に要望があれば記入してください</p>
-<textarea name="union_request"></textarea>
-
-<button type="submit">送信</button>
-
-</form>
-
-<div class="footer">ご協力ありがとうございました</div>
 </div>
 
-<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<!-- Q1 -->
+
+<div class="question">
+
+<h3>Q1 あなたは週休2日を取れていますか？</h3>
+
+<label><input type="radio" name="q1" value="週2日休んでいる">週2日休んでいる</label>
+
+<label><input type="radio" name="q1" value="週1日しか休んでいない。もう1日はタイムカードを打刻せずにフル出勤している">
+週1日しか休んでいない。もう1日はタイムカードを打刻せずにフル出勤している</label>
+
+<label><input type="radio" name="q1" value="週1日しか休んでいない。もう1日はタイムカードを打刻せずに半日出勤している">
+週1日しか休んでいない。もう1日はタイムカードを打刻せずに半日出勤している</label>
+
+<label><input type="radio" name="q1" value="週1日も休まず半日出勤している">
+週1日も休まず半日出勤している</label>
+
+<label><input type="radio" name="q1" value="最近1〜2ヶ月休んでいない">
+最近1〜2ヶ月休んでいない</label>
+
+<label><input type="radio" name="q1" value="最近3ヶ月以上休んでいない">
+最近3ヶ月以上休んでいない</label>
+
+<button type="button" class="back" onclick="back()">戻る</button>
+<button type="button" onclick="next()">次へ</button>
+
+</div>
+
+<!-- Q2 -->
+
+<div class="question">
+
+<h3>Q2 固定残業について</h3>
+
+<p><b>固定残業がついている方に聞きます</b></p>
+
+<label><input type="radio" name="q2" value="固定残業内で仕事が終わる">固定残業内で仕事が終わる</label>
+
+<label><input type="radio" name="q2" value="固定残業では足りないので終業のタイムカードを打って仕事をしている">
+固定残業では足りないので終業のタイムカードを打って仕事をしている</label>
+
+<label><input type="radio" name="q2" value="申請して残業している">申請して残業している</label>
+
+<p><b>固定残業がついていない方に聞きます</b></p>
+
+<label><input type="radio" name="q2" value="就業時間内に仕事が終わっている">
+就業時間内に仕事が終わっている</label>
+
+<label><input type="radio" name="q2" value="足りないので終業のタイムカードを打って仕事をしている">
+足りないので終業のタイムカードを打って仕事をしている</label>
+
+<label><input type="radio" name="q2" value="足りていないがサービス残業はしていない">
+足りていないがサービス残業はしていない</label>
+
+<label><input type="radio" name="q2" value="申請して残業している">
+申請して残業している</label>
+
+<button type="button" class="back" onclick="back()">戻る</button>
+<button type="button" onclick="next()">次へ</button>
+
+</div>
+
+<!-- Q3 -->
+
+<div class="question">
+
+<h3>Q3</h3>
+
+<p>Q2でタイムカードを打って仕事をしている方</p>
+
+<p>1日どれくらいサービス残業をしていますか</p>
+
+<label><input type="radio" name="q3" value="週1〜2回1時間">週1〜2回1時間</label>
+
+<label><input type="radio" name="q3" value="週1〜2回2時間">週1〜2回2時間</label>
+
+<label><input type="radio" name="q3" value="週1〜2回3時間以上">週1〜2回3時間以上</label>
+
+<label><input type="radio" name="q3" value="ほぼ毎日1時間">ほぼ毎日1時間</label>
+
+<label><input type="radio" name="q3" value="ほぼ毎日2時間">ほぼ毎日2時間</label>
+
+<label><input type="radio" name="q3" value="ほぼ毎日3時間以上">ほぼ毎日3時間以上</label>
+
+<button type="button" class="back" onclick="back()">戻る</button>
+<button type="button" onclick="next()">次へ</button>
+
+</div>
+
+<!-- Q4 -->
+
+<div class="question">
+
+<h3>Q4 あなたはなぜサービス残業をするのですか</h3>
+
+<label><input type="radio" name="q4" value="会社（上司）の命令だから">会社（上司）の命令だから</label>
+<label><input type="radio" name="q4" value="会社（上司）の命令はないが強要された">会社（上司）の命令はないが強要された</label>
+<label><input type="radio" name="q4" value="要員不足で仕方なくサービス残業をしている">要員不足で仕方なくサービス残業をしている</label>
+<label><input type="radio" name="q4" value="要員不足ですすんでサービス残業をしている">要員不足ですすんでサービス残業をしている</label>
+<label><input type="radio" name="q4" value="他人に任せられないのでサービス残業をしている">他人に任せられないのでサービス残業をしている</label>
+<label><input type="radio" name="q4" value="その他">その他</label>
+
+<button type="button" class="back" onclick="back()">戻る</button>
+<button type="button" onclick="next()">次へ</button>
+
+</div>
+
+<!-- Q5 -->
+
+<div class="question">
+
+<h3>Q5</h3>
+
+<p>Q4で3・4・5を選んだ方</p>
+
+<p>要員不足について上司に相談しましたか</p>
+
+<label><input type="radio" name="q5" value="相談した">相談した</label>
+<label><input type="radio" name="q5" value="相談していない">相談していない</label>
+
+<button type="button" class="back" onclick="back()">戻る</button>
+<button type="button" onclick="next()">次へ</button>
+
+</div>
+
+<!-- Q8 -->
+
+<div class="question">
+
+<h3>Q8 有給休暇が取れていますか</h3>
+
+<label><input type="radio" name="q8" value="はい" onclick="goto(10)">はい</label>
+<label><input type="radio" name="q8" value="いいえ" onclick="goto(9)">いいえ</label>
+
+<button type="button" class="back" onclick="back()">戻る</button>
+
+</div>
+
+<!-- Q9 -->
+
+<div class="question">
+
+<h3>Q9 なぜ有給休暇が取れませんか</h3>
+
+<label><input type="radio" name="q9" value="人員不足">人員不足</label>
+<label><input type="radio" name="q9" value="仕事が多い">仕事が多い</label>
+<label><input type="radio" name="q9" value="取りづらい雰囲気">取りづらい雰囲気</label>
+<label><input type="radio" name="q9" value="その他">その他</label>
+
+<button type="button" class="back" onclick="back()">戻る</button>
+<button type="button" onclick="goto(10)">次へ</button>
+
+</div>
+
+<!-- Q10 -->
+
+<div class="question">
+
+<h3>Q10 ハラスメント</h3>
+
+<label><input type="radio" name="q10" value="ある">ある</label>
+<label><input type="radio" name="q10" value="ない">ない</label>
+
+<p>内容</p>
+<textarea name="harassment"></textarea>
+
+<p>会社への要望</p>
+<textarea name="company_request"></textarea>
+
+<p>組合への要望</p>
+<textarea name="union_request"></textarea>
+
+<button type="button" class="back" onclick="back()">戻る</button>
+<button type="submit">送信</button>
+
+</div>
+
+</form>
+</div>
+
 <script>
-async function initLiff() {
-    try {
-        await liff.init({ liffId: "2009108719-XrG3xBru" });
 
-        console.log("ログイン状態:", liff.isLoggedIn());
+let current=0
+const q=document.querySelectorAll(".question")
 
-        const profile = await liff.getProfile();
-        alert("取得名：" + profile.displayName);
-
-    } catch (e) {
-        alert("エラー: " + e);
-    }
+function next(){
+q[current].classList.remove("active")
+current++
+q[current].classList.add("active")
 }
-initLiff();
-</script>
-<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-<script>
-async function initLiff() {
-    try {
-        await liff.init({ liffId: "2009108719-XrG3xBru" });
 
-        if (!liff.isLoggedIn()) return;
-
-        const profile = await liff.getProfile();
-        document.getElementById("line_name").value = profile.displayName;
-
-    } catch (e) {}
+function back(){
+q[current].classList.remove("active")
+current--
+q[current].classList.add("active")
 }
-initLiff();
+
+function goto(n){
+q[current].classList.remove("active")
+current=n
+q[current].classList.add("active")
+}
+
 </script>
 
 </body>
