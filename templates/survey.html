@@ -10,56 +10,53 @@
 body{
 font-family:sans-serif;
 background:#f4f8ff;
-margin:0;
-padding:15px;
+padding:20px;
 }
 
 .card{
-background:#fff;
+background:white;
 padding:20px;
 border-radius:12px;
-box-shadow:0 4px 12px rgba(0,0,0,0.08);
-max-width:520px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+max-width:700px;
 margin:auto;
 }
 
-.question{display:none;}
-.question.active{display:block;}
-
 label{
 display:block;
+background:#eef4ff;
 padding:12px;
 margin:8px 0;
-background:#eef4ff;
 border-radius:8px;
 }
 
-input[type=text]{
-width:100%;
-padding:10px;
+button{
+padding:10px 18px;
+margin-top:12px;
+border:none;
 border-radius:6px;
-border:1px solid #ccc;
+}
+
+.next{
+background:#2f7df6;
+color:white;
+}
+
+.back{
+background:#ccc;
 }
 
 textarea{
 width:100%;
-height:100px;
-border-radius:6px;
-border:1px solid #ccc;
+height:90px;
 }
 
-button{
-margin-top:12px;
-width:100%;
-padding:12px;
-border:none;
-background:#2d7df6;
-color:white;
-border-radius:8px;
+.thanks-text{
 font-size:16px;
+text-align:center;
+margin-top:40px;
+width:100%;
 }
-
-.back{background:#777;}
 
 </style>
 </head>
@@ -68,246 +65,254 @@ font-size:16px;
 
 <div class="card">
 
-<form method="POST" action="/submit">
+<form>
 
-<!-- 表紙 -->
-
-<div class="question active">
+<div id="q0">
 
 <h2>2026年3月 組合員アンケート</h2>
 
 <p>
-組合員の皆さんからのご意見をもとに職場の実態を把握し、
-皆さんが安心して働ける職場環境を作るために会社と協議していきたいと考えています。
+組合員の皆さんの率直な意見によって現場の問題点を把握し、
+それを改善できるよう会社と協議をして参ります。
 </p>
 
 <p>
-皆さんからいただいた意見は今後の組合活動に活かしていきますので、
-率直なご意見をお聞かせください。
+回答内容は個人名など公表することはありません。
 </p>
 
-<table style="width:100%">
-<tr>
-<td style="width:30%">店舗</td>
-<td><input name="store"></td>
-</tr>
+<p>
+このアンケートは組合活動以外の目的には使用しません。
+</p>
 
-<tr>
-<td>部門</td>
-<td><input name="department"></td>
-</tr>
+店 <input type="text" name="store"><br><br>
+部門 <input type="text" name="dept"><br><br>
+名前 <input type="text" name="name"><br><br>
 
-<tr>
-<td>名前</td>
-<td><input name="name"></td>
-</tr>
-</table>
-
-<button type="button" onclick="next()">アンケート開始</button>
+<button type="button" class="next" onclick="next()">次へ</button>
 
 </div>
 
-<!-- Q1 -->
+<div id="q1" style="display:none">
 
-<div class="question">
+<h2>Q1 あなたは週休２日をとっていますか</h2>
 
-<h3>Q1 あなたは週休2日を取れていますか？</h3>
+<label><input type="radio" name="q1">週２日休んでいる</label>
+<label><input type="radio" name="q1">週１日しか休んでいない。もう1日はタイムカードを打刻せずにフルに出勤している</label>
+<label><input type="radio" name="q1">週１日しか休んでいない。もう1日はタイムカードを打刻せずに半日（午前中）出勤している</label>
+<label><input type="radio" name="q1">週１日も休まず、タイムカードを打刻して半日（午前中）出勤している</label>
+<label><input type="radio" name="q1">最近１ヶ月～２ヶ月間休んでいない</label>
+<label><input type="radio" name="q1">最近３ヶ月以上休んでいない</label>
 
-<label><input type="radio" name="q1" value="週2日休んでいる">週2日休んでいる</label>
-
-<label><input type="radio" name="q1" value="週1日しか休んでいない。もう1日はタイムカードを打刻せずにフル出勤している">
-週1日しか休んでいない。もう1日はタイムカードを打刻せずにフル出勤している</label>
-
-<label><input type="radio" name="q1" value="週1日しか休んでいない。もう1日はタイムカードを打刻せずに半日出勤している">
-週1日しか休んでいない。もう1日はタイムカードを打刻せずに半日出勤している</label>
-
-<label><input type="radio" name="q1" value="週1日も休まず半日出勤している">
-週1日も休まず半日出勤している</label>
-
-<label><input type="radio" name="q1" value="最近1〜2ヶ月休んでいない">
-最近1〜2ヶ月休んでいない</label>
-
-<label><input type="radio" name="q1" value="最近3ヶ月以上休んでいない">
-最近3ヶ月以上休んでいない</label>
-
-<button type="button" class="back" onclick="back()">戻る</button>
-<button type="button" onclick="next()">次へ</button>
-
-</div>
-
-<!-- Q2 -->
-
-<div class="question">
-
-<h3>Q2 固定残業について</h3>
-
-<p><b>固定残業がついている方に聞きます</b></p>
-
-<label><input type="radio" name="q2" value="固定残業内で仕事が終わる">固定残業内で仕事が終わる</label>
-
-<label><input type="radio" name="q2" value="固定残業では足りないので終業のタイムカードを打って仕事をしている">
-固定残業では足りないので終業のタイムカードを打って仕事をしている</label>
-
-<label><input type="radio" name="q2" value="申請して残業している">申請して残業している</label>
-
-<p><b>固定残業がついていない方に聞きます</b></p>
-
-<label><input type="radio" name="q2" value="就業時間内に仕事が終わっている">
-就業時間内に仕事が終わっている</label>
-
-<label><input type="radio" name="q2" value="足りないので終業のタイムカードを打って仕事をしている">
-足りないので終業のタイムカードを打って仕事をしている</label>
-
-<label><input type="radio" name="q2" value="足りていないがサービス残業はしていない">
-足りていないがサービス残業はしていない</label>
-
-<label><input type="radio" name="q2" value="申請して残業している">
-申請して残業している</label>
-
-<button type="button" class="back" onclick="back()">戻る</button>
-<button type="button" onclick="next()">次へ</button>
-
-</div>
-
-<!-- Q3 -->
-
-<div class="question">
-
-<h3>Q3</h3>
-
-<p>Q2でタイムカードを打って仕事をしている方</p>
-
-<p>1日どれくらいサービス残業をしていますか</p>
-
-<label><input type="radio" name="q3" value="週1〜2回1時間">週1〜2回1時間</label>
-
-<label><input type="radio" name="q3" value="週1〜2回2時間">週1〜2回2時間</label>
-
-<label><input type="radio" name="q3" value="週1〜2回3時間以上">週1〜2回3時間以上</label>
-
-<label><input type="radio" name="q3" value="ほぼ毎日1時間">ほぼ毎日1時間</label>
-
-<label><input type="radio" name="q3" value="ほぼ毎日2時間">ほぼ毎日2時間</label>
-
-<label><input type="radio" name="q3" value="ほぼ毎日3時間以上">ほぼ毎日3時間以上</label>
-
-<button type="button" class="back" onclick="back()">戻る</button>
-<button type="button" onclick="next()">次へ</button>
-
-</div>
-
-<!-- Q4 -->
-
-<div class="question">
-
-<h3>Q4 あなたはなぜサービス残業をするのですか</h3>
-
-<label><input type="radio" name="q4" value="会社（上司）の命令だから">会社（上司）の命令だから</label>
-<label><input type="radio" name="q4" value="会社（上司）の命令はないが強要された">会社（上司）の命令はないが強要された</label>
-<label><input type="radio" name="q4" value="要員不足で仕方なくサービス残業をしている">要員不足で仕方なくサービス残業をしている</label>
-<label><input type="radio" name="q4" value="要員不足ですすんでサービス残業をしている">要員不足ですすんでサービス残業をしている</label>
-<label><input type="radio" name="q4" value="他人に任せられないのでサービス残業をしている">他人に任せられないのでサービス残業をしている</label>
-<label><input type="radio" name="q4" value="その他">その他</label>
-
-<button type="button" class="back" onclick="back()">戻る</button>
-<button type="button" onclick="next()">次へ</button>
-
-</div>
-
-<!-- Q5 -->
-
-<div class="question">
-
-<h3>Q5</h3>
-
-<p>Q4で3・4・5を選んだ方</p>
-
-<p>要員不足について上司に相談しましたか</p>
-
-<label><input type="radio" name="q5" value="相談した">相談した</label>
-<label><input type="radio" name="q5" value="相談していない">相談していない</label>
-
-<button type="button" class="back" onclick="back()">戻る</button>
-<button type="button" onclick="next()">次へ</button>
-
-</div>
-
-<!-- Q8 -->
-
-<div class="question">
-
-<h3>Q8 有給休暇が取れていますか</h3>
-
-<label><input type="radio" name="q8" value="はい" onclick="goto(10)">はい</label>
-<label><input type="radio" name="q8" value="いいえ" onclick="goto(9)">いいえ</label>
-
+<button type="button" class="next" onclick="next()">次へ</button>
 <button type="button" class="back" onclick="back()">戻る</button>
 
 </div>
 
-<!-- Q9 -->
+<div id="q2" style="display:none">
 
-<div class="question">
+<h2>Q2 固定残業はついていますか</h2>
 
-<h3>Q9 なぜ有給休暇が取れませんか</h3>
+<label><input type="radio" name="overtime" value="yes">固定残業が付いている</label>
+<label><input type="radio" name="overtime" value="no">固定残業がない</label>
 
-<label><input type="radio" name="q9" value="人員不足">人員不足</label>
-<label><input type="radio" name="q9" value="仕事が多い">仕事が多い</label>
-<label><input type="radio" name="q9" value="取りづらい雰囲気">取りづらい雰囲気</label>
-<label><input type="radio" name="q9" value="その他">その他</label>
-
+<button type="button" class="next" onclick="branchOvertime()">次へ</button>
 <button type="button" class="back" onclick="back()">戻る</button>
-<button type="button" onclick="goto(10)">次へ</button>
 
 </div>
 
-<!-- Q10 -->
+<div id="q3" style="display:none">
 
-<div class="question">
+<h2>固定残業が付いている方に伺います。固定残業の時間は足りていますか？</h2>
 
-<h3>Q10 ハラスメント</h3>
+<label><input type="radio" name="q3">足りている</label>
+<label><input type="radio" name="q3">足りないので終業のタイムカードを打って仕事をしている</label>
+<label><input type="radio" name="q3">足りていないがサービス残業はしていない</label>
 
-<label><input type="radio" name="q10" value="ある">ある</label>
-<label><input type="radio" name="q10" value="ない">ない</label>
-
-<p>内容</p>
-<textarea name="harassment"></textarea>
-
-<p>会社への要望</p>
-<textarea name="company_request"></textarea>
-
-<p>組合への要望</p>
-<textarea name="union_request"></textarea>
-
+<button type="button" class="next" onclick="next()">次へ</button>
 <button type="button" class="back" onclick="back()">戻る</button>
-<button type="submit">送信</button>
 
+</div>
+
+<div id="q4" style="display:none">
+
+<h2>固定残業がない方に伺います</h2>
+
+<label><input type="radio" name="q4">就業時間内に仕事が終わっている</label>
+<label><input type="radio" name="q4">足りないので終業のタイムカードを打って仕事をしている</label>
+<label><input type="radio" name="q4">足りていないがサービス残業はしていない</label>
+<label><input type="radio" name="q4">申請をして残業をしている</label>
+
+<button type="button" class="next" onclick="next()">次へ</button>
+<button type="button" class="back" onclick="back()">戻る</button>
+
+</div>
+
+<div id="q5" style="display:none">
+
+<h2>サービス残業は1日どれくらいしていますか</h2>
+
+<label><input type="radio">週に１度か２度、１時間</label>
+<label><input type="radio">週に１度か２度、２時間</label>
+<label><input type="radio">週に１度か２度、３時間以上</label>
+<label><input type="radio">ほとんど毎日1時間</label>
+<label><input type="radio">ほとんど毎日2時間</label>
+<label><input type="radio">ほとんど毎日3時間以上</label>
+
+<button type="button" class="next" onclick="next()">次へ</button>
+
+</div>
+
+<div id="q6" style="display:none">
+
+<h2>あなたは有給休暇が取れていますか</h2>
+
+<label><input type="radio" name="vac" value="yes">はい</label>
+<label><input type="radio" name="vac" value="no">いいえ</label>
+
+<button type="button" class="next" onclick="branchVacation()">次へ</button>
+<button type="button" class="back" onclick="back()">戻る</button>
+
+</div>
+
+<div id="q7" style="display:none">
+
+<h2>それはなぜですか？</h2>
+
+<label><input type="radio">人員不足</label>
+<label><input type="radio">取ったあとのことを考える</label>
+<label><input type="radio">公休すら休めないので取れない</label>
+
+<button type="button" class="next" onclick="next()">次へ</button>
+
+</div>
+
+<div id="q8" style="display:none">
+
+<h2>あなたはハラスメントを受けたことがありますか</h2>
+
+<label><input type="radio" name="har" value="no">ない</label>
+<label><input type="radio" name="har" value="yes">ある</label>
+
+<button type="button" class="next" onclick="branchHar()">次へ</button>
+
+</div>
+
+<div id="q9" style="display:none">
+
+<h2>それはどのようなハラスメントですか</h2>
+
+<textarea></textarea>
+
+<button type="button" class="next" onclick="next()">次へ</button>
+
+</div>
+
+<div id="q10" style="display:none">
+
+<h2>それを誰かに相談しましたか</h2>
+
+<label><input type="radio">相談していない</label>
+<label><input type="radio">相談した</label>
+
+<button type="button" class="next" onclick="next()">次へ</button>
+
+</div>
+
+<div id="q11" style="display:none">
+
+<h2>相談した方は問題が</h2>
+
+<label><input type="radio">解決した</label>
+<label><input type="radio">解決していない</label>
+
+<button type="button" class="next" onclick="next()">次へ</button>
+
+</div>
+
+<div id="q12" style="display:none">
+
+<h2>誰かがハラスメントを受けているのを見たことがありますか</h2>
+
+<label><input type="radio">ある</label>
+<label><input type="radio">ない</label>
+
+<button type="button" class="next" onclick="next()">次へ</button>
+
+</div>
+
+<div id="q13" style="display:none">
+
+<h2>会社はハラスメント対策ができていると思いますか</h2>
+
+<label><input type="radio">できている</label>
+<label><input type="radio">できていない</label>
+
+<button type="button" class="next" onclick="next()">次へ</button>
+
+</div>
+
+<div id="q14" style="display:none">
+
+<h2>会社に要望があればご記入ください</h2>
+<textarea></textarea>
+
+<h2>組合に要望があればご記入ください</h2>
+<textarea></textarea>
+
+<button type="button" class="next" onclick="finish()">送信</button>
+
+</div>
+
+<div id="thanks" style="display:none">
+<p class="thanks-text">ご協力ありがとうございました</p>
 </div>
 
 </form>
+
 </div>
 
 <script>
 
-let current=0
-const q=document.querySelectorAll(".question")
+let q=0
+
+function show(n){
+document.getElementById("q"+q).style.display="none"
+q=n
+document.getElementById("q"+q).style.display="block"
+}
 
 function next(){
-q[current].classList.remove("active")
-current++
-q[current].classList.add("active")
+show(q+1)
 }
 
 function back(){
-q[current].classList.remove("active")
-current--
-q[current].classList.add("active")
+show(q-1)
 }
 
-function goto(n){
-q[current].classList.remove("active")
-current=n
-q[current].classList.add("active")
+function branchOvertime(){
+let v=document.querySelector('input[name="overtime"]:checked')
+if(!v){alert("回答を選択してください");return}
+if(v.value==="yes"){show(3)}
+else{show(4)}
+}
+
+function branchVacation(){
+let v=document.querySelector('input[name="vac"]:checked')
+if(!v){alert("回答を選択してください");return}
+if(v.value==="no"){show(7)}
+else{show(8)}
+}
+
+function branchHar(){
+let v=document.querySelector('input[name="har"]:checked')
+if(!v){alert("回答を選択してください");return}
+if(v.value==="yes"){show(9)}
+else{show(12)}
+}
+
+function finish(){
+document.getElementById("q14").style.display="none"
+document.getElementById("thanks").style.display="block"
 }
 
 </script>
