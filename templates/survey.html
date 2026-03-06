@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>2026年3月 組合員アンケート</title>
 
 <style>
@@ -56,13 +55,6 @@ width:100%;
 height:90px;
 margin-top:10px;
 }
-.thanks{
-font-size:28px;
-font-weight:bold;
-text-align:center;
-margin-top:40px;
-color:#2d7ef7;
-}
 
 </style>
 </head>
@@ -96,33 +88,36 @@ color:#2d7ef7;
 
 </div>
 
+
 <div class="question" id="q1">
 
 <h2>Q1 週休2日を取っていますか</h2>
 
-<label><input type="radio" name="q1">週2日休んでいる</label>
-<label><input type="radio" name="q1">週1日</label>
-<label><input type="radio" name="q1">半日出勤</label>
-<label><input type="radio" name="q1">週0日</label>
-<label><input type="radio" name="q1">1〜2ヶ月休んでいない</label>
-<label><input type="radio" name="q1">3ヶ月以上休んでいない</label>
+<label><input type="radio" name="q1" value="1">週2日休んでいる</label>
+<label><input type="radio" name="q1" value="2">週1日</label>
+<label><input type="radio" name="q1" value="3">半日出勤</label>
+<label><input type="radio" name="q1" value="4">週0日</label>
+<label><input type="radio" name="q1" value="5">1〜2ヶ月休んでいない</label>
+<label><input type="radio" name="q1" value="6">3ヶ月以上休んでいない</label>
 
 <button class="back" type="button" onclick="next('q0')">戻る</button>
 <button type="button" onclick="next('q2')">次へ</button>
 
 </div>
 
+
 <div class="question" id="q2">
 
 <h2>Q2 固定残業はついていますか</h2>
 
-<label><input type="radio" name="overtime" value="yes">ついている</label>
-<label><input type="radio" name="overtime" value="no">ついていない</label>
+<label><input type="radio" name="overtime" value="1">ついている</label>
+<label><input type="radio" name="overtime" value="2">ついていない</label>
 
 <button class="back" onclick="next('q1')" type="button">戻る</button>
 <button onclick="branchQ2()" type="button">次へ</button>
 
 </div>
+
 
 <div class="question" id="q2a">
 
@@ -136,6 +131,7 @@ color:#2d7ef7;
 <button onclick="branchOvertime()" type="button">次へ</button>
 
 </div>
+
 
 <div class="question" id="q2b">
 
@@ -151,21 +147,23 @@ color:#2d7ef7;
 
 </div>
 
+
 <div class="question" id="q3">
 
 <h2>1日どれくらいサービス残業をしていますか</h2>
 
-<label><input type="radio" name="service">週1〜2回 1時間</label>
-<label><input type="radio" name="service">週1〜2回 2時間</label>
-<label><input type="radio" name="service">週1〜2回 3時間以上</label>
-<label><input type="radio" name="service">ほぼ毎日1時間</label>
-<label><input type="radio" name="service">ほぼ毎日2時間</label>
-<label><input type="radio" name="service">ほぼ毎日3時間以上</label>
+<label><input type="radio" name="service" value="1">週1〜2回 1時間</label>
+<label><input type="radio" name="service" value="2">週1〜2回 2時間</label>
+<label><input type="radio" name="service" value="3">週1〜2回 3時間以上</label>
+<label><input type="radio" name="service" value="4">ほぼ毎日1時間</label>
+<label><input type="radio" name="service" value="5">ほぼ毎日2時間</label>
+<label><input type="radio" name="service" value="6">ほぼ毎日3時間以上</label>
 
 <button class="back" onclick="next('q2')" type="button">戻る</button>
 <button onclick="next('q4')" type="button">次へ</button>
 
 </div>
+
 
 <div class="question" id="q4">
 
@@ -176,37 +174,34 @@ color:#2d7ef7;
 <label><input type="radio" name="reason" value="3">要員不足の為、仕方なく自らの判断で</label>
 <label><input type="radio" name="reason" value="4">要員不足の為、すすんで自らの判断で</label>
 <label><input type="radio" name="reason" value="5">要員不足ではなく、要因も充分なのだが、他の人に仕事を任せられなく仕事を仕事をしている</label>
-<label><input type="radio" name="reason" value="6">その他（家に早く帰ってもつまらないから会社にいる等）</label>
+<label><input type="radio" name="reason" value="6">その他</label>
 
 <button class="back" onclick="next('q3')" type="button">戻る</button>
 <button onclick="branchReason()" type="button">次へ</button>
 
 </div>
 
+
 <div class="question" id="q5">
 
 <h2>要員不足について上司に相談しましたか</h2>
 
-<label><input type="radio" name="consult" value="yes">相談した</label>
-<label><input type="radio" name="consult" value="no">相談していない</label>
+<label><input type="radio" name="consult" value="1">相談した</label>
+<label><input type="radio" name="consult" value="2">相談していない</label>
 
 <button class="back" onclick="next('q4')" type="button">戻る</button>
 <button onclick="branchConsult()" type="button">次へ</button>
 
 </div>
 
+
 <div class="question" id="q6">
 
 <h2>相談した結果</h2>
 
-<label><input type="radio" name="solve">上司に適切な指導を受け、要員不足は解消した</label>
-<label><input type="radio" name="solve">相談に乗ってくれるが、何もしてくれない</label>
-<label><input type="radio" name="solve">話を聞かない</label>
-
-<label>
-<input type="radio" name="solve" value="その他">その他
-<input type="text" name="solve_other">
-</label>
+<label><input type="radio" name="solve" value="1">上司に適切な指導を受け、要員不足は解消した</label>
+<label><input type="radio" name="solve" value="2">相談に乗ってくれるが、何もしてくれない</label>
+<label><input type="radio" name="solve" value="3">話を聞かない</label>
 
 <button class="back" onclick="next('q5')" type="button">戻る</button>
 <button onclick="next('q8')" type="button">次へ</button>
@@ -224,38 +219,41 @@ color:#2d7ef7;
 
 </div>
 
+
 <div class="question" id="q8">
 
 <h2>有給休暇は取れていますか</h2>
 
-<label><input type="radio" name="vacation" value="yes">はい</label>
-<label><input type="radio" name="vacation" value="no">いいえ</label>
+<label><input type="radio" name="vacation" value="1">はい</label>
+<label><input type="radio" name="vacation" value="2">いいえ</label>
 
-<button class="back" onclick="next('q5')" type="button">戻る</button>
+<button class="back" onclick="next('q7')" type="button">戻る</button>
 <button onclick="branchVacation()" type="button">次へ</button>
 
 </div>
+
 
 <div class="question" id="q9">
 
 <h2>有給が取れない理由</h2>
 
-<label><input type="radio" name="vacation_reason">人員不足</label>
-<label><input type="radio" name="vacation_reason">とった後のことを考える</label>
-<label><input type="radio" name="vacation_reason">公休すら休めないので取れない</label>
-<label><input type="radio" name="vacation_reason">とっているようにしているが実は働いている</label>
+<label><input type="radio" name="vacation_reason" value="1">人員不足</label>
+<label><input type="radio" name="vacation_reason" value="2">とった後のことを考える</label>
+<label><input type="radio" name="vacation_reason" value="3">公休すら休めないので取れない</label>
+<label><input type="radio" name="vacation_reason" value="4">とっているようにしているが実は働いている</label>
 
 <button class="back" onclick="next('q8')" type="button">戻る</button>
 <button onclick="next('q10')" type="button">次へ</button>
 
 </div>
 
+
 <div class="question" id="q10">
 
 <h2>Q10. ハラスメントを受けたことがありますか</h2>
 
-<label><input type="radio" name="harassment" value="ない">ない</label>
-<label><input type="radio" name="harassment" value="ある">ある</label>
+<label><input type="radio" name="harassment" value="1">ない</label>
+<label><input type="radio" name="harassment" value="2">ある</label>
 
 <div id="harassment_area" style="display:none">
 
@@ -264,16 +262,16 @@ color:#2d7ef7;
 
 <h3>それを誰かに相談しましたか</h3>
 
-<label><input type="radio" name="harassment_consult" value="yes">相談した</label>
-<label><input type="radio" name="harassment_consult" value="no">相談していない</label>
+<label><input type="radio" name="harassment_consult" value="1">相談した</label>
+<label><input type="radio" name="harassment_consult" value="2">相談していない</label>
 
 <div id="harassment_result" style="display:none">
 
 <h3>相談した結果</h3>
 
-<label><input type="radio" name="harassment_result">解決した</label>
-<label><input type="radio" name="harassment_result">相談に乗ってくれるが、何もしてくれない</label>
-<label><input type="radio" name="harassment_result">話を聞かない</label>
+<label><input type="radio" name="harassment_result" value="1">解決した</label>
+<label><input type="radio" name="harassment_result" value="2">相談に乗ってくれるが、何もしてくれない</label>
+<label><input type="radio" name="harassment_result" value="3">話を聞かない</label>
 
 </div>
 
@@ -284,30 +282,33 @@ color:#2d7ef7;
 
 </div>
 
+
 <div class="question" id="q11">
 
 <h2>Q11. 誰かがハラスメントを受けているのを見たことがありますか</h2>
 
-<label><input type="radio" name="harassment_seen">ある</label>
-<label><input type="radio" name="harassment_seen">ない</label>
+<label><input type="radio" name="harassment_seen" value="1">ある</label>
+<label><input type="radio" name="harassment_seen" value="2">ない</label>
 
 <button class="back" onclick="next('q10')" type="button">戻る</button>
 <button onclick="next('q12')" type="button">次へ</button>
 
 </div>
 
+
 <div class="question" id="q12">
 
 <h2>Q12. 会社のハラスメント対策は十分だと思いますか</h2>
 
-<label><input type="radio" name="company_measure">十分</label>
-<label><input type="radio" name="company_measure">不十分</label>
-<label><input type="radio" name="company_measure">わからない</label>
+<label><input type="radio" name="company_measure" value="1">十分</label>
+<label><input type="radio" name="company_measure" value="2">不十分</label>
+<label><input type="radio" name="company_measure" value="3">わからない</label>
 
 <button class="back" onclick="next('q11')" type="button">戻る</button>
 <button onclick="next('q13')" type="button">次へ</button>
 
 </div>
+
 
 <div class="question" id="q13">
 
@@ -319,6 +320,7 @@ color:#2d7ef7;
 <button onclick="next('q14')" type="button">次へ</button>
 
 </div>
+
 
 <div class="question" id="q14">
 
@@ -334,6 +336,7 @@ color:#2d7ef7;
 </form>
 </div>
 
+
 <script>
 
 function next(id){
@@ -345,7 +348,7 @@ document.getElementById(id).classList.add("active")
 
 function branchQ2(){
 let v=document.querySelector("input[name='overtime']:checked").value
-if(v==="yes"){next("q2a")}else{next("q2b")}
+if(v==="1"){next("q2a")}else{next("q2b")}
 }
 
 function branchOvertime(){
@@ -365,12 +368,12 @@ if(v==="3" || v==="4"){next("q5")}else{next("q8")}
 
 function branchConsult(){
 let v=document.querySelector("input[name='consult']:checked").value
-if(v==="yes"){next("q6")}else{next("q7")}
+if(v==="1"){next("q6")}else{next("q7")}
 }
 
 function branchVacation(){
 let v=document.querySelector("input[name='vacation']:checked").value
-if(v==="no"){next("q9")}else{next("q10")}
+if(v==="2"){next("q9")}else{next("q10")}
 }
 
 window.onload = function(){
@@ -378,7 +381,7 @@ window.onload = function(){
 document.querySelectorAll("input[name='harassment']").forEach(r=>{
 r.addEventListener("change",function(){
 
-if(this.value==="ある"){
+if(this.value==="2"){
 document.getElementById("harassment_area").style.display="block"
 }else{
 document.getElementById("harassment_area").style.display="none"
@@ -390,7 +393,7 @@ document.getElementById("harassment_area").style.display="none"
 document.querySelectorAll("input[name='harassment_consult']").forEach(r=>{
 r.addEventListener("change",function(){
 
-if(this.value==="yes"){
+if(this.value==="1"){
 document.getElementById("harassment_result").style.display="block"
 }else{
 document.getElementById("harassment_result").style.display="none"

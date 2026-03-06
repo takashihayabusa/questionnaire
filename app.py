@@ -5,21 +5,8 @@ import os
 
 app = Flask(__name__)
 
-# ==============================
-# 保存フォルダ
-# ==============================
+FILE_PATH = "survey_results.xlsx"
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-SAVE_DIR = os.path.join(BASE_DIR, "questionnaire")
-os.makedirs(SAVE_DIR, exist_ok=True)
-
-FILE_PATH = os.path.join(SAVE_DIR, "survey_results.xlsx")
-
-
-# ==============================
-# Excel保存
-# ==============================
 
 def save_to_excel(data):
 
@@ -28,18 +15,20 @@ def save_to_excel(data):
         "店",
         "部門",
         "名前",
-        "週休",
+        "Q1",
         "固定残業",
-        "固定残業時間",
+        "Q3",
+        "Q4",
         "サービス残業",
-        "有給休暇",
+        "理由",
+        "相談",
+        "相談結果",
+        "相談しない理由",
+        "有給",
         "有給理由",
         "ハラスメント",
-        "ハラスメント内容",
-        "相談",
-        "解決",
-        "目撃",
-        "会社評価",
+        "ハラスメント相談",
+        "ハラスメント結果",
         "会社要望",
         "組合要望"
     ]
@@ -59,79 +48,68 @@ def save_to_excel(data):
     wb.save(FILE_PATH)
 
 
-# ==============================
-# アンケート画面
-# ==============================
-
-@app.route("/")
 @app.route("/survey")
 def survey():
     return render_template("survey.html")
 
-
-# ==============================
-# 送信
-# ==============================
 
 @app.route("/submit", methods=["POST"])
 def submit():
 
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    store = request.form.get("store")
-    dept = request.form.get("dept")
-    name = request.form.get("name")
+    store = request.form.get("store","")
+    dept = request.form.get("dept","")
+    name = request.form.get("name","")
 
-    q1 = request.form.get("q1")
+    q1 = request.form.get("q1","")
+    overtime = request.form.get("overtime","")
+    q3 = request.form.get("q3","")
+    q4 = request.form.get("q4","")
+    service = request.form.get("service","")
+    reason = request.form.get("reason","")
 
-    overtime = request.form.get("overtime")
+    consult = request.form.get("consult","")
+    solve = request.form.get("solve","")
+    why = request.form.get("why","")
 
-    q3 = request.form.get("q3")
-    q4 = request.form.get("q4")
+    vacation = request.form.get("vacation","")
+    vacation_reason = request.form.get("vacation_reason","")
 
-    service = request.form.get("service")
+    harassment = request.form.get("harassment","")
+    harassment_consult = request.form.get("harassment_consult","")
+    harassment_result = request.form.get("harassment_result","")
 
-    vacation = request.form.get("vacation")
-    reason = request.form.get("reason")
+    company_request = request.form.get("company_request","")
+    union_request = request.form.get("union_request","")
 
-    harass = request.form.get("harass")
-    harass_text = request.form.get("harass_text")
-
-    consult = request.form.get("consult")
-    solve = request.form.get("solve")
-
-    seen = request.form.get("seen")
-
-    company = request.form.get("company")
-
-    company_request = request.form.get("company_request")
-    union_request = request.form.get("union_request")
-
-    save_to_excel([
+    row = [
         now,
         store,
         dept,
         name,
         q1,
         overtime,
-        q3 or q4,
+        q3,
+        q4,
         service,
-        vacation,
         reason,
-        harass,
-        harass_text,
         consult,
         solve,
-        seen,
-        company,
+        why,
+        vacation,
+        vacation_reason,
+        harassment,
+        harassment_consult,
+        harassment_result,
         company_request,
         union_request
-    ])
+    ]
 
-    return "<h2 style='text-align:center;'>ご協力ありがとうございました</h2>"
+    save_to_excel(row)
 
+    return render_template("thanks.html")
 
-# ==============================
 
 if __name__ == "__main__":
     app.run()
