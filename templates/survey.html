@@ -56,6 +56,13 @@ width:100%;
 height:90px;
 margin-top:10px;
 }
+.thanks{
+font-size:28px;
+font-weight:bold;
+text-align:center;
+margin-top:40px;
+color:#2d7ef7;
+}
 
 </style>
 </head>
@@ -66,8 +73,6 @@ margin-top:10px;
 
 <form method="POST" action="/submit">
 
-<!-- 表紙 -->
-
 <div class="question active" id="q0">
 
 <h2>2026年3月 組合員アンケート</h2>
@@ -75,7 +80,6 @@ margin-top:10px;
 <p>
 組合員の皆さんの率直な意見によって現場の問題点を把握し、
 改善できるよう会社と協議を行います。<br><br>
-
 このアンケートは組合活動以外の目的には使用しません。
 </p>
 
@@ -91,8 +95,6 @@ margin-top:10px;
 <button type="button" onclick="next('q1')">次へ</button>
 
 </div>
-
-<!-- Q1 -->
 
 <div class="question" id="q1">
 
@@ -110,8 +112,6 @@ margin-top:10px;
 
 </div>
 
-<!-- Q2 -->
-
 <div class="question" id="q2">
 
 <h2>Q2 固定残業はついていますか</h2>
@@ -119,43 +119,37 @@ margin-top:10px;
 <label><input type="radio" name="overtime" value="yes">ついている</label>
 <label><input type="radio" name="overtime" value="no">ついていない</label>
 
-<button class="back" type="button" onclick="next('q1')">戻る</button>
-<button type="button" onclick="branchQ2()">次へ</button>
+<button class="back" onclick="next('q1')" type="button">戻る</button>
+<button onclick="branchQ2()" type="button">次へ</button>
 
 </div>
-
-<!-- 固定残業あり -->
 
 <div class="question" id="q2a">
 
 <h2>固定残業の時間は足りていますか</h2>
 
 <label><input type="radio" name="q3" value="1">足りている</label>
-<label><input type="radio" name="q3" value="2">タイムカード後に仕事</label>
-<label><input type="radio" name="q3" value="3">足りていないがサービス残業なし</label>
+<label><input type="radio" name="q3" value="2">足りないので終業のたタイムカードを打って仕事をしている</label>
+<label><input type="radio" name="q3" value="3">足りていないがサービス残業はしていない</label>
 
-<button class="back" type="button" onclick="next('q2')">戻る</button>
-<button type="button" onclick="branchOvertime()">次へ</button>
+<button class="back" onclick="next('q2')" type="button">戻る</button>
+<button onclick="branchOvertime()" type="button">次へ</button>
 
 </div>
-
-<!-- 固定残業なし -->
 
 <div class="question" id="q2b">
 
 <h2>固定残業がない方</h2>
 
-<label><input type="radio" name="q4" value="1">就業時間内に終わる</label>
-<label><input type="radio" name="q4" value="2">タイムカード後に仕事</label>
-<label><input type="radio" name="q4" value="3">サービス残業なし</label>
-<label><input type="radio" name="q4" value="4">申請して残業</label>
+<label><input type="radio" name="q4" value="1">就業時間中に仕事が終わっている</label>
+<label><input type="radio" name="q4" value="2">足りないので終業のタイムカードを打って仕事をしている</label>
+<label><input type="radio" name="q4" value="3">足りていないがサービス残業はしていない</label>
+<label><input type="radio" name="q4" value="4">申請して残業をしている</label>
 
-<button class="back" type="button" onclick="next('q2')">戻る</button>
-<button type="button" onclick="branchNoOvertime()">次へ</button>
+<button class="back" onclick="next('q2')" type="button">戻る</button>
+<button onclick="branchNoOvertime()" type="button">次へ</button>
 
 </div>
-
-<!-- Q3 サービス残業 -->
 
 <div class="question" id="q3">
 
@@ -168,30 +162,26 @@ margin-top:10px;
 <label><input type="radio" name="service">ほぼ毎日2時間</label>
 <label><input type="radio" name="service">ほぼ毎日3時間以上</label>
 
-<button class="back" type="button" onclick="next('q2')">戻る</button>
-<button type="button" onclick="next('q4')">次へ</button>
+<button class="back" onclick="next('q2')" type="button">戻る</button>
+<button onclick="next('q4')" type="button">次へ</button>
 
 </div>
-
-<!-- Q4 -->
 
 <div class="question" id="q4">
 
 <h2>なぜサービス残業をするのですか</h2>
 
-<label><input type="radio" name="reason">会社の命令</label>
-<label><input type="radio" name="reason">上司の強要</label>
-<label><input type="radio" name="reason">要員不足</label>
-<label><input type="radio" name="reason">自分判断</label>
-<label><input type="radio" name="reason">任せられない</label>
-<label><input type="radio" name="reason">その他</label>
+<label><input type="radio" name="reason" value="1">会社（上司）の命令</label>
+<label><input type="radio" name="reason" value="2">会社（上司）のはっきりした命令はないが、それに近いことを強要されたから。の強要</label>
+<label><input type="radio" name="reason" value="3">要員不足の為、仕方なく自らの判断で</label>
+<label><input type="radio" name="reason" value="4">要員不足の為、すすんで自らの判断で</label>
+<label><input type="radio" name="reason" value="5">要員不足ではなく、要因も充分なのだが、他の人に仕事を任せられなく仕事を仕事をしている</label>
+<label><input type="radio" name="reason" value="6">その他（家に早く帰ってもつまらないから会社にいる等）</label>
 
-<button class="back" type="button" onclick="next('q3')">戻る</button>
-<button type="button" onclick="next('q5')">次へ</button>
+<button class="back" onclick="next('q3')" type="button">戻る</button>
+<button onclick="branchReason()" type="button">次へ</button>
 
 </div>
-
-<!-- Q5 -->
 
 <div class="question" id="q5">
 
@@ -200,28 +190,28 @@ margin-top:10px;
 <label><input type="radio" name="consult" value="yes">相談した</label>
 <label><input type="radio" name="consult" value="no">相談していない</label>
 
-<button class="back" type="button" onclick="next('q4')">戻る</button>
-<button type="button" onclick="branchConsult()">次へ</button>
+<button class="back" onclick="next('q4')" type="button">戻る</button>
+<button onclick="branchConsult()" type="button">次へ</button>
 
 </div>
-
-<!-- Q6 -->
 
 <div class="question" id="q6">
 
 <h2>相談した結果</h2>
 
-<label><input type="radio" name="solve">解決した</label>
-<label><input type="radio" name="solve">何もしてくれない</label>
+<label><input type="radio" name="solve">上司に適切な指導を受け、要員不足は解消した</label>
+<label><input type="radio" name="solve">相談に乗ってくれるが、何もしてくれない</label>
 <label><input type="radio" name="solve">話を聞かない</label>
-<label><input type="radio" name="solve">その他</label>
 
-<button class="back" type="button" onclick="next('q5')">戻る</button>
-<button type="button" onclick="next('q8')">次へ</button>
+<label>
+<input type="radio" name="solve" value="その他">その他
+<input type="text" name="solve_other">
+</label>
+
+<button class="back" onclick="next('q5')" type="button">戻る</button>
+<button onclick="next('q8')" type="button">次へ</button>
 
 </div>
-
-<!-- Q7 -->
 
 <div class="question" id="q7">
 
@@ -229,12 +219,10 @@ margin-top:10px;
 
 <textarea name="why"></textarea>
 
-<button class="back" type="button" onclick="next('q5')">戻る</button>
-<button type="button" onclick="next('q8')">次へ</button>
+<button class="back" onclick="next('q5')" type="button">戻る</button>
+<button onclick="next('q8')" type="button">次へ</button>
 
 </div>
-
-<!-- Q8 -->
 
 <div class="question" id="q8">
 
@@ -243,37 +231,102 @@ margin-top:10px;
 <label><input type="radio" name="vacation" value="yes">はい</label>
 <label><input type="radio" name="vacation" value="no">いいえ</label>
 
-<button class="back" type="button" onclick="next('q5')">戻る</button>
-<button type="button" onclick="branchVacation()">次へ</button>
+<button class="back" onclick="next('q5')" type="button">戻る</button>
+<button onclick="branchVacation()" type="button">次へ</button>
 
 </div>
-
-<!-- Q9 -->
 
 <div class="question" id="q9">
 
 <h2>有給が取れない理由</h2>
 
 <label><input type="radio" name="vacation_reason">人員不足</label>
-<label><input type="radio" name="vacation_reason">後の仕事が心配</label>
-<label><input type="radio" name="vacation_reason">公休も取れない</label>
+<label><input type="radio" name="vacation_reason">とった後のことを考える</label>
+<label><input type="radio" name="vacation_reason">公休すら休めないので取れない</label>
+<label><input type="radio" name="vacation_reason">とっているようにしているが実は働いている</label>
 
-<button class="back" type="button" onclick="next('q8')">戻る</button>
-<button type="button" onclick="next('q10')">次へ</button>
+<button class="back" onclick="next('q8')" type="button">戻る</button>
+<button onclick="next('q10')" type="button">次へ</button>
 
 </div>
 
-<!-- 最後 -->
-
 <div class="question" id="q10">
 
-<h2>会社への要望</h2>
+<h2>Q10. ハラスメントを受けたことがありますか</h2>
+
+<label><input type="radio" name="harassment" value="ない">ない</label>
+<label><input type="radio" name="harassment" value="ある">ある</label>
+
+<div id="harassment_area" style="display:none">
+
+<h3>それはどのようなハラスメントですか</h3>
+<textarea name="harassment_content"></textarea>
+
+<h3>それを誰かに相談しましたか</h3>
+
+<label><input type="radio" name="harassment_consult" value="yes">相談した</label>
+<label><input type="radio" name="harassment_consult" value="no">相談していない</label>
+
+<div id="harassment_result" style="display:none">
+
+<h3>相談した結果</h3>
+
+<label><input type="radio" name="harassment_result">解決した</label>
+<label><input type="radio" name="harassment_result">相談に乗ってくれるが、何もしてくれない</label>
+<label><input type="radio" name="harassment_result">話を聞かない</label>
+
+</div>
+
+</div>
+
+<button class="back" onclick="next('q9')" type="button">戻る</button>
+<button onclick="next('q11')" type="button">次へ</button>
+
+</div>
+
+<div class="question" id="q11">
+
+<h2>Q11. 誰かがハラスメントを受けているのを見たことがありますか</h2>
+
+<label><input type="radio" name="harassment_seen">ある</label>
+<label><input type="radio" name="harassment_seen">ない</label>
+
+<button class="back" onclick="next('q10')" type="button">戻る</button>
+<button onclick="next('q12')" type="button">次へ</button>
+
+</div>
+
+<div class="question" id="q12">
+
+<h2>Q12. 会社のハラスメント対策は十分だと思いますか</h2>
+
+<label><input type="radio" name="company_measure">十分</label>
+<label><input type="radio" name="company_measure">不十分</label>
+<label><input type="radio" name="company_measure">わからない</label>
+
+<button class="back" onclick="next('q11')" type="button">戻る</button>
+<button onclick="next('q13')" type="button">次へ</button>
+
+</div>
+
+<div class="question" id="q13">
+
+<h2>Q13. 会社への要望があれば記入してください</h2>
+
 <textarea name="company_request"></textarea>
 
-<h2>組合への要望</h2>
+<button class="back" onclick="next('q12')" type="button">戻る</button>
+<button onclick="next('q14')" type="button">次へ</button>
+
+</div>
+
+<div class="question" id="q14">
+
+<h2>Q14. 組合への要望があれば記入してください</h2>
+
 <textarea name="union_request"></textarea>
 
-<button class="back" type="button" onclick="next('q8')">戻る</button>
+<button class="back" onclick="next('q13')" type="button">戻る</button>
 <button type="submit">送信</button>
 
 </div>
@@ -305,6 +358,11 @@ let v=document.querySelector("input[name='q4']:checked").value
 if(v==="2"){next("q3")}else{next("q8")}
 }
 
+function branchReason(){
+let v=document.querySelector("input[name='reason']:checked").value
+if(v==="3" || v==="4"){next("q5")}else{next("q8")}
+}
+
 function branchConsult(){
 let v=document.querySelector("input[name='consult']:checked").value
 if(v==="yes"){next("q6")}else{next("q7")}
@@ -314,6 +372,30 @@ function branchVacation(){
 let v=document.querySelector("input[name='vacation']:checked").value
 if(v==="no"){next("q9")}else{next("q10")}
 }
+
+document.querySelectorAll("input[name='harassment']").forEach(r=>{
+r.addEventListener("change",function(){
+
+if(this.value==="ある"){
+document.getElementById("harassment_area").style.display="block"
+}else{
+document.getElementById("harassment_area").style.display="none"
+}
+
+})
+})
+
+document.querySelectorAll("input[name='harassment_consult']").forEach(r=>{
+r.addEventListener("change",function(){
+
+if(this.value==="yes"){
+document.getElementById("harassment_result").style.display="block"
+}else{
+document.getElementById("harassment_result").style.display="none"
+}
+
+})
+})
 
 </script>
 
