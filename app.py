@@ -21,6 +21,7 @@ def save_to_excel(data):
         "Q4",
         "サービス残業",
         "理由",
+        "理由その他",
         "相談",
         "相談結果",
         "相談しない理由",
@@ -67,7 +68,9 @@ def submit():
     q3 = request.form.get("q3","")
     q4 = request.form.get("q4","")
     service = request.form.get("service","")
+
     reason = request.form.get("reason","")
+    reason_other = request.form.get("reason_other","")
 
     consult = request.form.get("consult","")
     solve = request.form.get("solve","")
@@ -94,6 +97,7 @@ def submit():
         q4,
         service,
         reason,
+        reason_other,
         consult,
         solve,
         why,

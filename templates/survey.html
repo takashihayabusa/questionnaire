@@ -170,17 +170,21 @@ margin-top:10px;
 <h2>なぜサービス残業をするのですか</h2>
 
 <label><input type="radio" name="reason" value="1">会社（上司）の命令</label>
-<label><input type="radio" name="reason" value="2">会社（上司）のはっきりした命令はないが、それに近いことを強要されたから。の強要</label>
+<label><input type="radio" name="reason" value="2">会社（上司）のはっきりした命令はないが、それに近いことを強要された</label>
 <label><input type="radio" name="reason" value="3">要員不足の為、仕方なく自らの判断で</label>
 <label><input type="radio" name="reason" value="4">要員不足の為、すすんで自らの判断で</label>
-<label><input type="radio" name="reason" value="5">要員不足ではなく、要因も充分なのだが、他の人に仕事を任せられなく仕事を仕事をしている</label>
-<label><input type="radio" name="reason" value="6">その他</label>
+<label><input type="radio" name="reason" value="5">要員は十分だが他の人に任せられない</label>
+
+<label>
+<input type="radio" name="reason" value="6">
+その他
+<input type="text" name="reason_other" style="margin-left:10px;width:200px;">
+</label>
 
 <button class="back" onclick="next('q3')" type="button">戻る</button>
 <button onclick="branchReason()" type="button">次へ</button>
 
 </div>
-
 
 <div class="question" id="q5">
 
